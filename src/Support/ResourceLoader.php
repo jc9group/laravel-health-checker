@@ -41,7 +41,7 @@ class ResourceLoader
     private function getEnabledResources($resources)
     {
         if (
-            is_array($filters = config($configKey = 'health.resources.enabled'))
+            is_array($filters = ResourcesLocator::getEnabledResources())
         ) {
             return collect($resources)->filter(function ($resource, $name) use (
                 $filters
@@ -56,7 +56,7 @@ class ResourceLoader
             });
         }
 
-        throw new DomainException("Invalid value for config('$configKey'')");
+        throw new DomainException('Invalid enabled resources config');
     }
 
     /**
@@ -148,6 +148,7 @@ class ResourceLoader
             $files->merge($customFiles);
         }
         
+
         $files =
             $files->count() == 0
                 ? $this->yaml->loadFromDirectory(package_resources_dir())

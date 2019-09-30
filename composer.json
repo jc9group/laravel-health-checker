@@ -56,13 +56,6 @@
             "PragmaRX\\Health\\Tests\\PhpUnit\\": "tests/PhpUnit/"
         }
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "PragmaRX\\Health\\ServiceProvider"
-            ]
-        }
-    },
     "scripts": {
         "test": [
             "@composer install",
