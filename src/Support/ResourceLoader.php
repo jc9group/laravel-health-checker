@@ -3,6 +3,7 @@
 namespace PragmaRX\Health\Support;
 
 use DomainException;
+use PragmaRX\Health\ResourcesLocator;
 use PragmaRX\Yaml\Package\Yaml;
 use PragmaRX\Yaml\Package\Support\Resolver;
 
@@ -141,7 +142,12 @@ class ResourceLoader
         $files = $this->yaml->loadFromDirectory(
             config('health.resources.path')
         );
-
+        
+        foreach (ResourcesLocator::getAllPaths() as $path) {
+            $customFiles = $this->yaml->loadFromDirectory($path);
+            $files->merge($customFiles);
+        }
+        
         $files =
             $files->count() == 0
                 ? $this->yaml->loadFromDirectory(package_resources_dir())
