@@ -142,18 +142,17 @@ class ResourceLoader
         $files = $this->yaml->loadFromDirectory(
             config('health.resources.path')
         );
+
+        $files =
+            $files->count() === 0
+                ? $this->yaml->loadFromDirectory(package_resources_dir())
+                : $files;
         
         foreach (ResourcesLocator::getAllPaths() as $path) {
             $customFiles = $this->yaml->loadFromDirectory($path);
-            $files->merge($customFiles);
+            $files = $files->merge($customFiles);
         }
         
-
-        $files =
-            $files->count() == 0
-                ? $this->yaml->loadFromDirectory(package_resources_dir())
-                : $files;
-
         return $files;
     }
 

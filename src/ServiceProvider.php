@@ -238,7 +238,7 @@ class ServiceProvider extends IlluminateServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function boot()
     {
         $this->mergeConfig();
 
