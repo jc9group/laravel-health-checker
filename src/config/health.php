@@ -138,7 +138,7 @@ return [
         |   false = Disables caching
         |   30 = (integer) Minutes to cache
         */
-        'minutes' => config('app.debug') === true ? false : 1,
+        'minutes' => false,
     ],
 
     'database' => [
